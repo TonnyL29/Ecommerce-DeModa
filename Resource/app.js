@@ -97,6 +97,7 @@ const MostrarCar = (car) =>{
 	const modalTitle = document.getElementById('modal-title');
 	const modalBody = document.getElementById('modal-body');
 	const modalFooter = document.getElementById('modal-footer');
+	modalBody.innerHTML = "";
 	car.forEach(cars => {
 	const {id, title, price, image} = cars;
 	console.log(cars);
