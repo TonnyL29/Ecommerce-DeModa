@@ -24,7 +24,7 @@ function CargarProductos (productos){
 	productos.forEach(prod => {
 	const {id, title, price, category, image} = prod;
 		contenedor.innerHTML += `<div class="mx-auto card" style="width: 18rem;">
-		<img src="${image}" class="card-img-top mx-auto" style="width: 65%;" alt="">
+		<img src="${image}" class="card-img-top mx-auto pt-4" style="width: 65%;" alt="">
 		<div class="card-body">
 		  <h5 class="card-title">${title}</h5>
 		  <p class="card-text"><br></p>
@@ -97,6 +97,7 @@ const MostrarCar = (car) =>{
 	const modalTitle = document.getElementById('modal-title');
 	const modalBody = document.getElementById('modal-body');
 	const modalFooter = document.getElementById('modal-footer');
+	console.log(modalBody);
 	modalBody.innerHTML = "";
 	car.forEach(cars => {
 	const {id, title, price, image} = cars;
