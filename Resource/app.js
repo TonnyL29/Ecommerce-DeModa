@@ -93,15 +93,17 @@ bntcar.onclick = () => {
 	MostrarCar(car)
 }
 
+
 const MostrarCar = (car) =>{
 	const modalTitle = document.getElementById('modal-title');
 	const modalBody = document.getElementById('modal-body');
 	const modalFooter = document.getElementById('modal-footer');
-	console.log(modalBody);
 	modalBody.innerHTML = "";
+	let PrecioTotal = 0;
 	car.forEach(cars => {
 	const {id, title, price, image} = cars;
-	console.log(cars);
+		PrecioTotal = PrecioTotal+price;
+
 	modalTitle.textContent = 'Su carrito esta listo';
 	modalBody.innerHTML += `<div class="modal-contenedor">
 	<div>
@@ -113,9 +115,8 @@ const MostrarCar = (car) =>{
   <p>Cantidad :</p>
   <button class="btn btn-danger"  onclick="eliminarProducto(${id})">Eliminar producto</button>
 	</div>
-  </div>
-	`
-	modalFooter.innerHTML = `<button type="button" class="btn btn-danger" id="vaciarCarrito">
+  </div>`
+	modalFooter.innerHTML = `<div class"row"><span><p class="d-block p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3">Precio total: $${PrecioTotal}</p></span></div><div class"row"><button type="button" class="btn btn-danger" id="vaciarCarrito">
 	Vaciar carrito
   </button>
   <button type="button" id="procesarCompra" class="btn btn-primary">
@@ -125,19 +126,15 @@ const MostrarCar = (car) =>{
 	type="button"
 	class="btn btn-secondary"
 	data-bs-dismiss="modal">Cerrar
-  </button>
-  <span>Precio total:</span>
-  <p class="text-center"></p>`
+  </button></div>`
+
 	});
 
 	if (car.length === 0) {
-		console.log("Nada");
 		modalBody.innerHTML = `
 		<p class="text-center text-primary parrafo">¡Aun no agregaste nada!</p>
 		`;
-	  } else {
-		console.log("Algo");
-	  }	
+	}	
 	//   if (precioTotal) {
 	// 	precioTotal.innerText = carrito.reduce(
 	// 	  (acc, prod) => acc + prod.cantidad * prod.precio,
@@ -157,6 +154,7 @@ const AddCar = (id) => {
   .catch(function(error) {
 	  console.log('Hubo un problema con la petición:' + error.message);
   });
+
 
 	(car.length >= 0) ? NumeroCar(car.length) :  ClearNum();
 }
