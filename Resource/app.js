@@ -6,7 +6,11 @@ const bntcar = document.getElementById('btncar');
 const Modal = new bootstrap.Modal('#modal', {});
 const car = []; 
 
-
+const LoadWeb = () =>{
+	produc();
+	CargarCategorias();
+	ClearNum();
+}
 
 function produc (){
 	fetch(url)
@@ -90,7 +94,7 @@ const verDetalle = (productos) =>{
 }
 
 bntcar.onclick = () => {
-	MostrarCar(car)
+	MostrarCar(car);
 }
 
 
@@ -134,13 +138,7 @@ const MostrarCar = (car) =>{
 		modalBody.innerHTML = `
 		<p class="text-center text-primary parrafo">¡Aun no agregaste nada!</p>
 		`;
-	}	
-	//   if (precioTotal) {
-	// 	precioTotal.innerText = carrito.reduce(
-	// 	  (acc, prod) => acc + prod.cantidad * prod.precio,
-	// 	  0
-	// 	);
-	//   }
+	}
 	  Modal.show();
 	  //guardarStorage();
 };
