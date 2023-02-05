@@ -59,6 +59,7 @@ const CargarCategorias = () =>{
 
 menu.addEventListener('click', (e) =>{
 	let categ =(e.target.lastChild.data);
+	console.log(categ);
 	categ = `${categ[0].toLowerCase()}${categ.substring(1)}`;
 	filterCat(categ);
 })
