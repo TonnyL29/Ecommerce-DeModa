@@ -5,7 +5,7 @@ const numerCar = document.getElementById('numerCar');
 const bntcar = document.getElementById('btncar');
 const Modal = new bootstrap.Modal('#modal', {});
 const car = []; 
-const categ = [];
+const catego = [];
 
 const LoadWeb = () =>{
 	produc();
@@ -21,7 +21,7 @@ function produc (){
 		CargarProductos(productos);
 	})
 	.catch(function(error) {
-		console.log('Hubo un problema con la petición:' + error.message);
+		console.log('Hubo un problema con la petición de los productos: ' + error.message);
 	}); 
 }
 
@@ -49,15 +49,16 @@ const CargarCategorias = () =>{
 	fetch(`${url}/categories`)
             .then(res=>res.json())
             .then(categorias=>{(categorias)
-				categ.push(categorias)
 				i = 0;
 				categorias.forEach(categ =>{
+					catego.push(categorias)
+					console.log(catego)
 					menu.innerHTML += `<li><a class="dropdown-item" id =cat${i} href="#">${categ[0].toUpperCase()}${categ.substring(1)}</a></li>`
 					i++;
 				})
 			})
 			.catch(function(error) {
-				console.log('Hubo un problema con la petición:' + error.message);
+				console.log('Hubo un problema con la petición de las categorias: ' + error.message);
 			});
 }
 
@@ -145,7 +146,6 @@ const MostrarCar = (car) =>{
 		`;
 	}
 	  Modal.show();
-	  //guardarStorage();
 };
 
 const AddCar = (id) => {
@@ -190,39 +190,37 @@ const filterCat = (categ) => {
 
 
 const cargarFooter = () =>{
-	let col1-logo = document.getElementById('col1-logo');
-	footer.innerHTML += `
-		<div class="col-sx-12 col-md-6 col-lg-3 text-white">
-			<div>
-				<a href="#"><img src="Resource/Logo.png" alt="Logo De Moda" width="120px" /></a>
+	let rowfooter = document.getElementById('rowfooter');
+	rowfooter.innerHTML += `
+			<div class="col-sx-12 col-md-6 col-lg-3 text-white">
+				<div>
+					<a href="#"><img src="Resource/Logo.png" alt="Logo De Moda" width="150px" /></a>
+				</div>
+				<div>
+					<p class='h6 mt-3 mb-1 text-center'>De Moda, tu lugar siempre de moda</p>
+				</div>
 			</div>
-			<div>
-				<p class='h6 mt-3 mb-1 text-center'>De Moda, tu lugar siempre de moda</p>
+			<div class='col-sx-12 col-md-6 col-lg-3 aling-center'>
+            	<div id="contCateg"><p class='h4 text-center text-white'>Categorias</p></div>
+            	<div class='text-center h6 mt-3'><a class='text-dark text-decoration-none' href='/'>Electronics</a></div>
+              	<div class='text-center h6 mt-3'><a class='text-dark text-decoration-none' href='/'>Jewelery</a></div>
+              	<div class='text-center h6 mt-3'><a class='text-dark text-decoration-none' href='/'>Men's clothing</a></div>
+              	<div class='text-center h6 mt-3'><a class='text-dark text-decoration-none' href='/'>Women's clothing</a></div>
+          	</div>
+          	<div class='col-sx-12 col-md-6 col-lg-3'>
+          	<div><p class='h4 text-center text-white'>Nosotros</p></div>
+              	<div class='text-center h5'>Te esperamos en</div>
+              	<div class='text-center mb-3'><span class='material-symbols-outlined me-2'>home_pin</span>Av. Calle publica n° 911 Local 4</div>
+              	<div class='text-center h5'>Horario</div>
+              	<div class='text-center'>Lunes a Viernes de</div>
+              	<div class='text-center mb-3'>9:30 a 17:00 hrs</div>
 			</div>
-		</div>`;
+
+          	<div class='col-sx-12 col-md-6 col-lg-3'>
+              	<div><p class='h4 text-center text-white'>Contactanos</p></div>
+              	<div class='text-center h6'><a class='text-decoration-none text-dark' href="/"><img class='me-2 mt-2 imgredes' src='./Resource/img/WhatsApp.png' alt="WhatsApp"> WhatsApp</a></div>
+              	<div class='text-center h6'><a class='text-decoration-none text-dark' href="/"><img class='me-2 mt-2 imgredes' src='./Resource/img/Instagram.png' alt="Instagram">Instagram</a></div>
+              	<div class='text-center h6'><a class='text-decoration-none text-dark' href="/"><img class='me-2 mt-2 imgredes' src='./Resource/img/Facebook.png' alt="WhatsApp">Facebook</a></div>
+              	<div class='text-center h6'><a class='text-decoration-none text-dark' href="/"><img class='me-2 mt-2 imgredes' src='./Resource/img/Youtube.png' alt="WhatsApp">YouTube</a></div>
+          	</div>`;		
 }
-
-
-/* 			
-          	<div className="col-sx-12 col-md-6 col-lg-3 aling-center">
-            	<div id="contCateg"><p className='h4 text-center text-white'>Categorias</p></div>
-            	<div className='text-center h6 mt-3'><a onClick={cargarCat(`electronics`)} className='text-dark text-decoration-none' href='/'>Electronics</a></div>
-              	<div className='text-center h6 mt-3'><a onClick={cargarCat(`jewelery`)} className='text-dark text-decoration-none' href='/'>Jewelery</a></div>
-              	<div className='text-center h6 mt-3'><a onClick={cargarCat(`men's%20clothing`)} className='text-dark text-decoration-none' href='/'>Men's clothing</a></div>
-              	<div className='text-center h6 mt-3'><a onClick={cargarCat(`women's%20clothing`)} className='text-dark text-decoration-none' href='/'>Women's clothing</a></div>
-          	</div>
-          	<div className="col-sx-12 col-md-6 col-lg-3">
-          	<div><p className='h4 text-center text-white'>Nosotros</p></div>
-              	<div className='text-center h5'>Te esperamos en</div>
-              	<div className='text-center mb-3'><span className="material-symbols-outlined me-2">home_pin</span>Av. Calle publica n° 911 Local 4</div>
-              	<div className='text-center h5'>Horario</div>
-              	<div className='text-center'>Lunes a Viernes de</div>
-              	<div className='text-center mb-3'>9:30 a 17:00 hrs</div>
-          	</div>
-          	<div className="col-sx-12 col-md-6 col-lg-3">
-              	<div><p className='h4 text-center text-white'>Contactanos</p></div>
-              	<div className='text-center h6'><a href="/"><img className='me-2 mt-2' src={WhatsApp} alt="WhatsApp"  width={35}/> WhatsApp</a></div>
-              	<div className='text-center h6'><a href="/"><img className='me-2 mt-2' src={instagram} alt="Instagram" width={35}/>Instagram</a></div>
-              	<div className='text-center h6'><a href="/"><img className='me-2 mt-2' src={facebook} alt="WhatsApp" width={35}/>Facebook</a></div>
-              	<div className='text-center h6'><a href="/"><img className='me-2 mt-2' src={Youtube} alt="WhatsApp" width={35}/>YouTube</a></div>
-          	</div> */
