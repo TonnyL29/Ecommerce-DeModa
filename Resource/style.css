@@ -7,6 +7,14 @@ body{
     background: #c6c9c7;
 }
 
+.noneview{
+    display: none;
+}
+
+.view{
+    display: inline-block;
+}
+
 .modal-contenedor{
     display:flex;
     align-items: center;
@@ -21,4 +29,9 @@ body{
 }
 .imgredes{
     width: 2rem;
+}
+
+.btn-categ-elim{
+    width: 10rem;
+    height: 3rem;
 }

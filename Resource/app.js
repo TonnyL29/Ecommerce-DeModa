@@ -6,6 +6,7 @@ const bntcar = document.getElementById('btncar');
 const Modal = new bootstrap.Modal('#modal', {});
 const car = []; 
 const catego = [];
+const ProductStock = [];
 
 const LoadWeb = () =>{
 	produc();
@@ -26,6 +27,7 @@ function produc (){
 }
 
 function CargarProductos (productos){
+	ProductStock.push(productos);
 	contenedor.innerHTML ="";
 	productos.forEach(prod => {
 	const {id, title, price, category, image} = prod;
@@ -52,7 +54,6 @@ const CargarCategorias = () =>{
 				i = 0;
 				categorias.forEach(categ =>{
 					catego.push(categorias)
-					console.log(catego)
 					menu.innerHTML += `<li><a class="dropdown-item" id =cat${i} href="#">${categ[0].toUpperCase()}${categ.substring(1)}</a></li>`
 					i++;
 				})
@@ -64,7 +65,6 @@ const CargarCategorias = () =>{
 
 menu.addEventListener('click', (e) =>{
 	let categ =(e.target.lastChild.data);
-	console.log(categ);
 	categ = `${categ[0].toLowerCase()}${categ.substring(1)}`;
 	filterCat(categ);
 })
@@ -81,7 +81,7 @@ const VerProducto = (id) => {
 }
 
 const verDetalle = (productos) =>{
-	const {id, title, price, image, description} = productos;
+	const {id, title, price, image, description,cantidad = 1} = productos;
 	const modalTitle = document.getElementById('modal-title');
 	const modalBody = document.getElementById('modal-body');
 	const modalFooter = document.getElementById('modal-footer');
@@ -93,6 +93,7 @@ const verDetalle = (productos) =>{
 	<p class="text-center text-primary fs-3">Precio: $${price}</p>
 	`;
 	modalFooter.innerHTML = `
+	<p class="card-subtitle mb-2 text-muted">Cantidad: ${cantidad}</p>
 	<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btnclose">Cerrar</button>
 	<button onclick=AddCar(${id}) class="btn btn-primary sticky-bottom"><span class="material-symbols-outlined">add_shopping_cart</span></button>
 	`
@@ -157,8 +158,6 @@ const AddCar = (id) => {
   .catch(function(error) {
 	  console.log('Hubo un problema con la petición:' + error.message);
   });
-
-
 	(car.length >= 0) ? NumeroCar(car.length) :  ClearNum();
 }
 
@@ -181,11 +180,20 @@ const NumeroCar = (i) =>{
 }
 
 const filterCat = (categ) => {
+	viewcateg(categ);
 	fetch(`${url}/category/${categ.toString()}`)
         .then(res=>res.json())
         .then(ProdCat =>{
 			CargarProductos(ProdCat);
 		})
+}
+
+const viewcateg = (a) =>{
+	let b = a.toString();
+	let btncategelim = document.getElementById('btncategelim');
+	btncategelim.innerText = b;
+	btncategelim.remove.class = 'noneview';
+	btncategelim.add.class = 'view';
 }
 
 
@@ -224,3 +232,5 @@ const cargarFooter = () =>{
               	<div class='text-center h6'><a class='text-decoration-none text-dark' href="/"><img class='me-2 mt-2 imgredes' src='./Resource/img/Youtube.png' alt="WhatsApp">YouTube</a></div>
           	</div>`;		
 }
+
+
